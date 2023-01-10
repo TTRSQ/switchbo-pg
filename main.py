@@ -61,6 +61,9 @@ def request_bot_api(path: str, method: Method, param: dict = {}):
 """
 
 devices = request_bot_api("/v1.1/devices", Method.GET)["body"]["deviceList"]
+remote_devices = request_bot_api("/v1.1/devices", Method.GET)["body"][
+    "infraredRemoteList"
+]
 
 # 湿度計のidを取得
 meter_plus_device_id = ""
