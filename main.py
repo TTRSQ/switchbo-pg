@@ -3,11 +3,9 @@ import hashlib
 import hmac
 import base64
 import httpx
-import dotenv
 import os
 from enum import Enum
 
-dotenv.load_dotenv()
 API_TOKEN = os.getenv("API_TOKEN")
 API_SECRET = os.getenv("API_SECRET")
 BOT_API_HOST = "https://api.switch-bot.com"
