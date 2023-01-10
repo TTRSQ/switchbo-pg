@@ -91,6 +91,6 @@ print(humidifier_off_scene_id)
 # 加湿器をONにする
 print(request_bot_api(f"/v1.1/scenes/{humidifier_on_scene_id}/execute", Method.POST))
 
-time.sleep(10)
+time.sleep(60)
 # 加湿器をOFFにする
 print(request_bot_api(f"/v1.1/scenes/{humidifier_off_scene_id}/execute", Method.POST))
