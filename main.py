@@ -52,6 +52,14 @@ def request_bot_api(path: str, method: Method, param: dict = {}):
     return res.json()
 
 
+"""
+下記のコードでやっていること
+- デバイス一覧から湿度計のIDを取得
+- 取得したIDを用いて湿度計から湿度や気温の値を取得
+- アプリで作成したシーン一覧を取得
+- 必要なシーンを名前で絞り込んで実行
+"""
+
 devices = request_bot_api("/v1.1/devices", Method.GET)["body"]["deviceList"]
 
 # 湿度計のidを取得
