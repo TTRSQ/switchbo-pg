@@ -3,11 +3,9 @@ import hashlib
 import hmac
 import base64
 import httpx
-import dotenv
 import os
 from enum import Enum
 
-dotenv.load_dotenv()
 API_TOKEN = os.getenv("API_TOKEN")
 API_SECRET = os.getenv("API_SECRET")
 BOT_API_HOST = "https://api.switch-bot.com"
@@ -48,10 +46,11 @@ def request_bot_api(path: str, method: Method, param: dict = {}):
         res = httpx.get(BOT_API_HOST + path, headers=headers, params=param)
     elif method == Method.POST:
         headers["Content-Type"] = "application/json; charset=utf8"
-        res = httpx.post(BOT_API_HOST + path, headers=headers, params=param)
+        res = httpx.post(BOT_API_HOST + path, headers=headers, json=param)
     return res.json()
 
-
 # API Usage
-devices = request_bot_api("/v1.1/devices", Method.GET)["body"]["deviceList"]
-print(devices)
+resp = request_bot_api("/v1.1/devices", Method.GET)
+devices = resp["body"]["deviceList"]
+for device in devices:
+    print(device)
