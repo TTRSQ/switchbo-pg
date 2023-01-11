@@ -50,45 +50,7 @@ def request_bot_api(path: str, method: Method, param: dict = {}):
     return res.json()
 
 
-"""
-下記のコードでやっていること
-- デバイス一覧から湿度計のIDを取得
-- 取得したIDを用いて湿度計から湿度や気温の値を取得
-- アプリで作成したシーン一覧を取得
-- 必要なシーンを名前で絞り込んで実行
-"""
-
-devices = request_bot_api("/v1.1/devices", Method.GET)["body"]["deviceList"]
-remote_devices = request_bot_api("/v1.1/devices", Method.GET)["body"][
-    "infraredRemoteList"
-]
-
-# 湿度計のidを取得
-meter_plus_device_id = ""
+resp = request_bot_api("/v1.1/devices", Method.GET)
+devices = resp["body"]["deviceList"]
 for device in devices:
-    if device["deviceType"] == "MeterPlus":
-        meter_plus_device_id = device["deviceId"]
-        break
-
-print(meter_plus_device_id)
-print(request_bot_api(f"/v1.1/devices/{meter_plus_device_id}/status", Method.GET))
-scenes = request_bot_api("/v1.1/scenes", Method.GET)["body"]
-
-# 加湿器をコントロールするsceneの取得
-humidifier_on_scene_id = ""
-humidifier_off_scene_id = ""
-for scene in scenes:
-    if scene["sceneName"] == "加湿器ON":
-        humidifier_on_scene_id = scene["sceneId"]
-    if scene["sceneName"] == "加湿器OFF":
-        humidifier_off_scene_id = scene["sceneId"]
-
-print(humidifier_on_scene_id)
-print(humidifier_off_scene_id)
-
-# 加湿器をONにする
-print(request_bot_api(f"/v1.1/scenes/{humidifier_on_scene_id}/execute", Method.POST))
-
-time.sleep(60)
-# 加湿器をOFFにする
-print(request_bot_api(f"/v1.1/scenes/{humidifier_off_scene_id}/execute", Method.POST))
+    print(device)
