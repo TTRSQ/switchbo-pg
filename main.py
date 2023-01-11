@@ -49,7 +49,7 @@ def request_bot_api(path: str, method: Method, param: dict = {}):
         res = httpx.post(BOT_API_HOST + path, headers=headers, json=param)
     return res.json()
 
-
+# API Usage
 resp = request_bot_api("/v1.1/devices", Method.GET)
 devices = resp["body"]["deviceList"]
 for device in devices:
