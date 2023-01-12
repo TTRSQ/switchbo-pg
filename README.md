@@ -3,7 +3,7 @@ sandbox
 ## USAGE
 - 環境変数ファイルを作成する `cp .env.tmpl .env`
 - .env ファイルの `API_TOKEN`, `API_SECRET` をswitchbotアプリからコピーして入れる
-- 依存関係のインストール `pipenv install`
+- 依存関係のインストール `pipenv sync --dev`
 - 実行する `pipenv run python main.py`
 
 ## NOTE
